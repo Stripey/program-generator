@@ -1,9 +1,11 @@
 import React from 'react';
+import { DropFile } from './DropFile';
 
 function App() {
   return (
     <div>
-      App
+      Hello world
+      <DropFile/>
     </div>
   );
 }
