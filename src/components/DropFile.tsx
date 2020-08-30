@@ -1,29 +1,39 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useDropzone } from "react-dropzone";
+
 import { parseText } from "../utilities/praseText";
+import { ProgramContext } from "../state/ProgramContext";
 
 export const DropFile: React.FC = () => {
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file: any) => {
-      const reader = new FileReader();
+  const { loadProgram } = useContext(ProgramContext);
 
-      reader.onabort = () => console.log("file reading was aborted");
-      reader.onerror = () => console.log("file reading has failed");
-      reader.onload = () => {
-        const data: string = reader.result as string;
-        const stringArray: string[] = data
-          .split("\n")
-          .filter((string) => string !== "")
-          .map((string) => string.trim());
-        // console.log(typeof data);
-        // stringArray.forEach((string) => console.log(string));
+  // This causes a lot of re-renderings I dont know how to fix
+  // This might be caused fron useContext making loadProgram a new function
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      acceptedFiles.forEach((file: any) => {
+        const reader = new FileReader();
 
-        console.log(parseText(stringArray))
-      };
-      reader.readAsText(file);
-      // console.log(reader);
-    });
-  }, []);
+        reader.onabort = () => console.log("file reading was aborted");
+        reader.onerror = () => console.log("file reading has failed");
+        reader.onload = () => {
+          const data: string = reader.result as string;
+          const stringArray: string[] = data
+            .split("\n")
+            .filter((string) => string !== "")
+            .map((string) => string.trim());
+          // console.log(typeof data);
+          // stringArray.forEach((string) => console.log(string));
+
+          // console.log(parseText(stringArray))
+          loadProgram(parseText(stringArray));
+        };
+        reader.readAsText(file);
+        // console.log(reader);
+      });
+    },
+    [loadProgram]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 

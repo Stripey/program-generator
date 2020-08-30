@@ -1,12 +1,10 @@
 import { Program, workoutDay } from "../types/program";
 
-export const parseText = (file: string[]) : Program => {
-  // console.log(file.slice(6));
-  console.log(file);
+export const parseText = (file: string[]): Program => {
   let program: Program = {
     name: file[0],
     trackedLifts: [],
-    rounding: 0,
+    rounding: 5,
     notes: [],
     routine: [],
   };
@@ -79,8 +77,6 @@ export const parseText = (file: string[]) : Program => {
       if (day[trackedLift] === undefined) day[trackedLift] = [];
       day[trackedLift].push(line);
     }
-
-
   }
 
   // Have to handle the last loop

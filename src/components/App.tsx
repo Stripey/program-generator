@@ -1,12 +1,12 @@
-import React from 'react';
-import { DropFile } from './DropFile';
+import React from "react";
+import { DropFile } from "./DropFile";
+import { ProgramProvider } from "../state/ProgramContext";
 
 function App() {
   return (
-    <div>
-      Hello world
-      <DropFile/>
-    </div>
+    <ProgramProvider>
+      <DropFile />
+    </ProgramProvider>
   );
 }
 
