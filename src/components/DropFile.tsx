@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import { parseText } from "../utilities/praseText";
 
 export const DropFile: React.FC = () => {
   const onDrop = useCallback((acceptedFiles) => {
@@ -13,9 +14,11 @@ export const DropFile: React.FC = () => {
         const stringArray: string[] = data
           .split("\n")
           .filter((string) => string !== "")
-          .map((string) => string.trimStart());
+          .map((string) => string.trim());
         // console.log(typeof data);
-        stringArray.forEach((string) => console.log(string));
+        // stringArray.forEach((string) => console.log(string));
+
+        console.log(parseText(stringArray))
       };
       reader.readAsText(file);
       // console.log(reader);
