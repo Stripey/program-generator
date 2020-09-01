@@ -15,10 +15,10 @@ export const exportToSpreadsheet = async (program: Program) => {
     liftCell.value = cell.value === "Rounding" ? program.rounding : 100;
     trackedLifts[cell.value as string] = liftCell;
   });
-
+  if(program.notes) worksheet.addRow([...program.notes]);
   // Being writing of routine
   // Only increment main row by largest day, that is what counter is for
-  let mainRow = 5;
+  let mainRow = 6;
   for (const week of program.routine) {
     let col = 2;
     let longest = 0;
@@ -57,6 +57,7 @@ export const exportToSpreadsheet = async (program: Program) => {
             intensityCell.value = {
               formula: `=ROUND(${trackedLifts[lift].address} * ${actualValue}, ${trackedLifts["Rounding"].address})`,
               date1904: true,
+              result: `${Math.round((100 * +actualValue) / program.rounding) * program.rounding}`
             };
           }
 
@@ -66,7 +67,7 @@ export const exportToSpreadsheet = async (program: Program) => {
         col += 2;
       }
 
-      if (counter > longest) longest = counter + 5;
+      if (counter > longest) longest = counter + 2;
     }
     mainRow += longest;
     longest= 0;
