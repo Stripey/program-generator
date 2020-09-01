@@ -69,6 +69,7 @@ export const exportToSpreadsheet = async (program: Program) => {
       if (counter > longest) longest = counter + 5;
     }
     mainRow += longest;
+    longest= 0;
   }
   // Write to file at the end.
   const fileType =

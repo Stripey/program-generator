@@ -38,9 +38,14 @@ export const DropFile: React.FC = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      <p>Drag and drop program files here, or click to select files</p>
+    <div
+      className="flex justify-center bg-white px-4 py-5 border-b border-gray-200 sm:px-6"
+      {...getRootProps()}
+    >
+      <div className="text-lg leading-6 font-medium text-gray-900">
+        <input {...getInputProps()} />
+        <p className="self-center">Drag and drop program files here, or click to select files</p>
+      </div>
     </div>
   );
 };
