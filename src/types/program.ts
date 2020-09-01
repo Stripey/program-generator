@@ -6,5 +6,5 @@ export interface Program {
   trackedLifts: string[];
   rounding: number;
   notes?: string[];
-  routine?: workoutDay[][];
+  routine: workoutDay[][];
 }

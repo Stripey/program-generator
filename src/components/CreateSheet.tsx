@@ -10,7 +10,7 @@ export const CreateSheet: React.FC = () => {
   const { state } = useContext(ProgramContext);
 
   return (
-    <button onClick={() => exportToSpreadsheet(state, state.name)}>
+    <button onClick={() => exportToSpreadsheet(state)}>
       Create Sheet
     </button>
   );
